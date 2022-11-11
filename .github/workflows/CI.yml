@@ -66,6 +66,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      - uses: JS-DevTools/npm-publish@v1
-            with:
-              token: ${{ secrets.NPM_TOKEN }}
+      - name: Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
