@@ -1,7 +1,14 @@
 name: CI
+
+  # on:
+  # - push
+  # - pull_request
+
 on:
-  - push
-  - pull_request
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   Test:
@@ -15,8 +22,7 @@ jobs:
           - macos-latest
           - windows-latest
         node_version:
-          - 12
-          - 14
+          - 16
         architecture:
           - x64
     steps:
@@ -33,11 +39,32 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Build Bundles
-        run: npm run build:bundles
-
       - name: Lint
         run: npm run lint:ts
 
       - name: Tests
         run: npm test
+
+  Publish:
+    # only publishes to registry if on master & package versions have changed
+    if: ${{ github.ref == 'refs/heads/master' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node_version }}
+          architecture: ${{ matrix.architecture }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish
+        run: npm run publish:github
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
