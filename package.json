@@ -29,7 +29,7 @@
   ],
   "sideEffects": false,
   "scripts": {
-		"publish:github": "echo 'test'",
+		"publish:github": "npx lerna publish from-package --yes --no-verify-access --ignore-scripts",
     "apitest:build": "webpack --mode development --config ./apitest/webpack.config.js",
     "apitest:serve": "webpack serve --mode development --config ./apitest/webpack.config.js",
     "build": "npm run clean && npm run build:cjs && npm run build:module:api && npx api-extractor run --local --verbose && npm run test:build && npm run build:styles",

@@ -1,14 +1,14 @@
 name: CI
 
-  # on:
-  # - push
-  # - pull_request
-
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
   Test:
@@ -39,6 +39,12 @@ jobs:
       - name: Build
         run: npm run build
 
+        # Fails the build if the working tree is dirty
+        # which happens when you don't update the API docs in line
+        # with the tsdoc comments
+      - name: Check working tree
+        run: test -z "$(git status --porcelain)"
+
       - name: Lint
         run: npm run lint:ts
 
@@ -47,7 +53,7 @@ jobs:
 
   Publish:
     # only publishes to registry if on master & package versions have changed
-    if: ${{ github.ref == 'refs/heads/master' }}
+    # if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
 
     steps:

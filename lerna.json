@@ -1,0 +1,21 @@
+{
+  "version": "5.0.1",
+  "npmClient": "npm",
+  "useWorkspaces": false,
+  "packages": [
+    "**"
+  ],
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "*.md"
+      ]
+    },
+    "bootstrap": {
+      "npmClientArgs": [
+        "--no-package-lock"
+      ]
+    }
+  },
+  "useNx": false
+}
