@@ -1,7 +1,3 @@
-📓  &nbsp; **Related JIRA**
-
-
-
 🤔  &nbsp; **What does this PR do?**
 
 - Add bullets..
