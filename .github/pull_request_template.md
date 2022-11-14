@@ -25,3 +25,4 @@ Add any sample images.
 - [ ] I have tested my changes.
 - [ ] I have added tests for my changes.
 - [ ] I have updated the project documentation to reflect my changes.
+- [ ] I have bumped the package version if I require this change to be published to npm.

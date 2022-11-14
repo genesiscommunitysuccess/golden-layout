@@ -51,7 +51,7 @@ jobs:
 
   Publish:
     # only publishes to registry if on master & package versions have changed
-    # if: ${{ github.ref == 'refs/heads/master' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
 
     steps:
