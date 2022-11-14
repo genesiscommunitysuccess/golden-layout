@@ -1,4 +1,4 @@
-<!-- 
+<!--
 Please note that bugs are dealt with higher priority, other issues will be dealt with whenever possible.
 For feature requests, please delete everything below this line
 For bugs, please check that your bug has not been reported and this is not a duplicate
@@ -14,3 +14,7 @@ For bugs, please check that your bug has not been reported and this is not a dup
 <!-- Link to a codepen example that demonstrates your issue.
 You can fork the following as a template
 https://codepen.io/ButchMonkey/pen/GzGZey -->
+
+<!-- Optional, delete if N/A -->
+**JIRA Link:**
+Link to JIRA item if issue is from the Genesis Org:
