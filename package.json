@@ -1,7 +1,7 @@
 {
-  "name": "golden-layout",
-  "version": "2.6.0",
-  "description": "A multi-screen javascript Layout manager",
+  "name": "@genesis-community/golden-layout",
+  "version": "2.6.1",
+  "description": "A @genesis-community fork of the GoldenLayout multi-screen javascript Layout manager",
   "keywords": [
     "docking",
     "javascript",
@@ -12,14 +12,17 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/golden-layout/golden-layout.git"
+    "url": "https://github.com/genesiscommunitysuccess/golden-layout.git"
   },
-  "homepage": "https://github.com/golden-layout/golden-layout",
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/genesiscommunitysuccess/golden-layout",
   "bugs": {
-    "url": "https://github.com/golden-layout/golden-layout/issues"
+    "url": "https://github.com/genesiscommunitysuccess/golden-layout/issues"
   },
   "license": "MIT",
-  "author": "Golden Layout community",
+  "author": "@genesis-community fork - Golden Layout community",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "typings": "dist/types/index.d.ts",
@@ -29,31 +32,31 @@
   ],
   "sideEffects": false,
   "scripts": {
+    "apitest:build": "webpack --mode development --config ./apitest/webpack.config.js",
+    "apitest:serve": "webpack serve --mode development --config ./apitest/webpack.config.js",
+    "build": "npm run clean && npm run build:cjs && npm run build:module:api && npx api-extractor run --local --verbose && npm run test:build && npm run build:styles",
+    "build:bundles": "webpack --config ./scripts/webpack.config.js",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:module": "tsc -p tsconfig.module.json",
     "build:module:api": "tsc -p tsconfig.module.api.json",
     "build:module:full": "tsc -p tsconfig.module.full.json",
     "build:module:strip": "tsc -p tsconfig.module.strip.json",
-    "test:build": "tsc -p test/tsconfig.json",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:ts": "npm run build:module && npm run build:cjs",
-    "build:bundles": "webpack --config ./scripts/webpack.config.js",
     "build:styles": "node ./scripts/css.js",
-    "build": "npm run clean && npm run build:cjs && npm run build:module:api && npx api-extractor run --local --verbose && npm run test:build && npm run build:styles",
-    "update:scss": "npx del-cli ./src/scss/goldenlayout-base.scss && npx copyfiles -f ./src/less/goldenlayout-base.less ./src/scss && npx less2sass ./src/scss/goldenlayout-base.less &&  npx del-cli ./src/scss/goldenlayout-base.less",
+    "build:ts": "npm run build:module && npm run build:cjs",
     "clean": "npm-run-all clean:*",
     "clean:dist": "npx del-cli dist",
     "clean:lib": "npx del-cli lib",
     "clean:test": "npx del-cli test/dist",
-    "lint:autofix": "eslint src/ts --fix",
-    "lint:ts": "eslint -c .eslintrc.js --ext .ts src/ts test",
-    "test:watch": "karma start",
-    "test": "karma start --single-run --browsers ChromeHeadless",
     "coverage": "karma start --single-run --no-auto-watch --coverage=true || echo done",
     "doc": "npm run build && npx copyfiles -f temp/golden-layout.api.json doc/input && cd doc && npx api-documenter markdown",
     "doc:typeddocfull": "npx del-cli doc/full && typedoc --options ./typedoc.full.json",
     "doc:typeddocstrip": "npx del-cli doc/strip && typedoc --options ./typedoc.stripInternal.json",
-    "apitest:build": "webpack --mode development --config ./apitest/webpack.config.js",
-    "apitest:serve": "webpack serve --mode development --config ./apitest/webpack.config.js"
+    "lint:autofix": "eslint src/ts --fix",
+    "lint:ts": "eslint -c .eslintrc.js --ext .ts src/ts test",
+    "test": "karma start --single-run --browsers ChromeHeadless",
+    "test:build": "tsc -p test/tsconfig.json",
+    "test:watch": "karma start",
+    "update:scss": "npx del-cli ./src/scss/goldenlayout-base.scss && npx copyfiles -f ./src/less/goldenlayout-base.less ./src/scss && npx less2sass ./src/scss/goldenlayout-base.less &&  npx del-cli ./src/scss/goldenlayout-base.less"
   },
   "devDependencies": {
     "@microsoft/api-documenter": "^7.12.7",
@@ -87,7 +90,7 @@
     "source-map-loader": "^3.0.0",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.2.3",
-    "typedoc": "^0.22.13",
+    "typedoc": "^0.23.20",
     "typescript": "^4.6.3",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.5.0",

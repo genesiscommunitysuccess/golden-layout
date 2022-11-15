@@ -1,8 +1,8 @@
 # Golden Layout
 
-[![NPM version](https://img.shields.io/npm/v/golden-layout)](https://www.npmjs.com/package/golden-layout) [![License](https://img.shields.io/github/license/golden-layout/golden-layout)](https://img.shields.io/github/license/golden-layout/golden-layout)
+[![NPM version](https://img.shields.io/npm/v/@genesis-community/golden-layout)](https://www.npmjs.com/package/@genesis-community/golden-layout) [![License](https://img.shields.io/github/license/genesiscommunitysuccess/golden-layout)](https://github.com/genesiscommunitysuccess/golden-layout/blob/master/LICENSE)
 
-Golden Layout is a Javascript layout manager which enables you to layout components in a web page and re-arrange them with drag and drop. Its features include:
+The @genesis-community fork of the Golden Layout Javascript layout manager, which enables you to layout components in a web page and re-arrange them with drag and drop. Its features include:
 
 * Native popup windows
 * Touch support
@@ -21,4 +21,4 @@ The library can be installed into an application package with the npm command:\
 
 ## More information
 
-For more information, please refer to the [Golden Layout website](https://golden-layout.github.io/golden-layout)
+For more information, please see [our Github repo.](https://github.com/genesiscommunitysuccess/golden-layout)
