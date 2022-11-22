@@ -320,6 +320,8 @@ export abstract class ContentItem extends EventEmitter {
     // (undocumented)
     static isComponentParentableItem(item: ContentItem): item is ComponentParentableItem;
     // (undocumented)
+    set isDragged(b: boolean);
+    // (undocumented)
     isGround: boolean;
     // (undocumented)
     get isInitialised(): boolean;

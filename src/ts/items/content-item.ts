@@ -34,6 +34,8 @@ export abstract class ContentItem extends EventEmitter {
     private _throttledEvents: string[];
     /** @internal */
     private _isInitialised;
+    /** @internal */
+    private _isDragged = false;
 
     /** @internal */
     size: number;
@@ -53,6 +55,12 @@ export abstract class ContentItem extends EventEmitter {
     get type(): ItemType { return this._type; }
     get id(): string { return this._id; }
     set id(value: string) { this._id = value; }
+    set isDragged(b: boolean) {
+        this._isDragged = b;
+        if (this.isComponent) {
+            (this.parent as Stack).isDragged = b;
+        }
+    }
     /** @internal */
     get popInParentIds(): string[] { return this._popInParentIds; }
     get parent(): ContentItem | null { return this._parent; }
@@ -156,7 +164,10 @@ export abstract class ContentItem extends EventEmitter {
             /**
              * If this was the last content item, remove this node as well
              */
-            if (!this.isGround && this._isClosable === true) {
+            if (!this.isGround && (
+                    this._isClosable === true
+                    /* Temporarily remove this so we can drag it to a different location */
+                    || this._isDragged)) {
                 if (this._parent === null) {
                     throw new UnexpectedNullError('CIUC00874');
                 } else {
