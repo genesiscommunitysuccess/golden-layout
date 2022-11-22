@@ -35,7 +35,7 @@ export abstract class ContentItem extends EventEmitter {
     /** @internal */
     private _isInitialised;
     /** @internal */
-    private _isDragged: boolean = false;
+    private _isDragged = false;
 
     /** @internal */
     size: number;
@@ -57,7 +57,7 @@ export abstract class ContentItem extends EventEmitter {
     set id(value: string) { this._id = value; }
     set isDragged(b: boolean) {
         this._isDragged = b;
-        if (ContentItem.isComponentItem(this)) {
+        if (this.isComponent) {
             (this.parent as Stack).isDragged = b;
         }
     }
