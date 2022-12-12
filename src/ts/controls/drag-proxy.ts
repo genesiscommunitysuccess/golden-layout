@@ -47,19 +47,7 @@ export class DragProxy extends EventEmitter {
         this._dragListener.on('drag', (offsetX, offsetY, event) => this.onDrag(offsetX, offsetY, event));
         this._dragListener.on('dragStop', () => this.onDrop());
 
-        console.log("mw  - test")
-        console.log("mw", this._componentItem)
-        console.log("mw", this._componentItem.element) // TODO: Add listener to stop bubbling here?
-
-        console.log("mw", this._componentItem.element.children[0]);
-    const containedElements = Array.from(this._componentItem.element.children[0].children);
-
-        containedElements.forEach(element => {
-          if (customElements.get(element.localName)) {
-              element.dispatchEvent(new Event('dragStart'))
-            }
-        });
-
+        this.fireEventsOnLayoutElements('dragStart')
         this.createDragProxyElements(x, y);
 
         if (this._componentItem.parent === null) {
@@ -81,11 +69,21 @@ export class DragProxy extends EventEmitter {
         this._layoutManager.calculateItemAreas();
         this.setDropPosition(x, y);
 
-        containedElements.forEach(element => {
-          if (customElements.get(element.localName)) {
-              element.dispatchEvent(new Event('dragStop'))
-            }
-        });
+    }
+
+    private fireEventsOnLayoutElements<T extends keyof EventEmitter.EventParamsMap>(event: T) {
+        let containedElements: Element[] = [];
+        try {
+            containedElements = Array.from(
+              this._componentItem.element?.children[0]?.children
+            );
+        } catch (error) {
+            // Let containedElements by an empty array if we fail to fill it
+        }
+
+        containedElements
+            .filter((e) => customElements.get(e.localName))
+            .forEach((e) => e.dispatchEvent(new Event(event)));
     }
 
     /** Create Stack-like structure to contain the dragged component */
@@ -204,6 +202,7 @@ export class DragProxy extends EventEmitter {
         }
 
         this._componentItem.exitDragMode();
+        this.fireEventsOnLayoutElements('dragStop')
 
         /*
          * Valid drop area found
