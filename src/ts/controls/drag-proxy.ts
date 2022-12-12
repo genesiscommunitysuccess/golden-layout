@@ -47,6 +47,19 @@ export class DragProxy extends EventEmitter {
         this._dragListener.on('drag', (offsetX, offsetY, event) => this.onDrag(offsetX, offsetY, event));
         this._dragListener.on('dragStop', () => this.onDrop());
 
+        console.log("mw  - test")
+        console.log("mw", this._componentItem)
+        console.log("mw", this._componentItem.element) // TODO: Add listener to stop bubbling here?
+
+        console.log("mw", this._componentItem.element.children[0]);
+    const containedElements = Array.from(this._componentItem.element.children[0].children);
+
+        containedElements.forEach(element => {
+          if (customElements.get(element.localName)) {
+              element.dispatchEvent(new Event('dragStart'))
+            }
+        });
+
         this.createDragProxyElements(x, y);
 
         if (this._componentItem.parent === null) {
@@ -67,6 +80,12 @@ export class DragProxy extends EventEmitter {
         this.determineMinMaxXY();
         this._layoutManager.calculateItemAreas();
         this.setDropPosition(x, y);
+
+        containedElements.forEach(element => {
+          if (customElements.get(element.localName)) {
+              element.dispatchEvent(new Event('dragStop'))
+            }
+        });
     }
 
     /** Create Stack-like structure to contain the dragged component */
