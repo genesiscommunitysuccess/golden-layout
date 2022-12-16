@@ -47,7 +47,7 @@ export class DragProxy extends EventEmitter {
         this._dragListener.on('drag', (offsetX, offsetY, event) => this.onDrag(offsetX, offsetY, event));
         this._dragListener.on('dragStop', () => this.onDrop());
 
-        this.fireEventToParent('dragStart')
+        this.dispatchEventToParent('dragStart')
         this.createDragProxyElements(x, y);
 
         if (this._componentItem.parent === null) {
@@ -70,7 +70,7 @@ export class DragProxy extends EventEmitter {
         this.setDropPosition(x, y);
     }
 
-    private fireEventToParent<T extends keyof EventEmitter.EventParamsMap>(e: T) {
+    private dispatchEventToParent<T extends keyof EventEmitter.EventParamsMap>(e: T) {
         this._componentItem.element.dispatchEvent(new Event(e))
     }
 
@@ -229,7 +229,7 @@ export class DragProxy extends EventEmitter {
         this._element.remove();
 
         this._layoutManager.emit('itemDropped', this._componentItem);
-        this.fireEventToParent('dragStart')
+        this.dispatchEventToParent('dragStart')
 
         if (this._componentItemFocused && droppedComponentItem !== undefined) {
             droppedComponentItem.focus();
