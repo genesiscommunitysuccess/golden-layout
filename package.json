@@ -1,6 +1,6 @@
 {
   "name": "@genesis-community/golden-layout",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "description": "A @genesis-community fork of the GoldenLayout multi-screen javascript Layout manager",
   "keywords": [
     "docking",
