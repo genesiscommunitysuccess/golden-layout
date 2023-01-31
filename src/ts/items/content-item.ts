@@ -260,6 +260,7 @@ export abstract class ContentItem extends EventEmitter {
         if (this._parent === null) {
             throw new UnexpectedNullError('CIR11110');
         } else {
+            this.layoutManager.tryDispatchEventToParent('closeButtonPressed');
             this._parent.removeChild(this);
         }
     }

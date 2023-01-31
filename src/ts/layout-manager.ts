@@ -1055,6 +1055,11 @@ export abstract class LayoutManager extends EventEmitter {
     }
 
     /** @internal */
+    tryDispatchEventToParent<T extends keyof EventEmitter.EventParamsMap>(e: T) {
+      this.container.dispatchEvent(new Event(e));
+    }
+
+    /** @internal */
     private createContentItemFromConfig(config: ResolvedItemConfig, parent: ContentItem): ContentItem {
         switch (config.type) {
             case ItemType.ground: throw new AssertError('LMCCIFC68871');
