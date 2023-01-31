@@ -345,7 +345,6 @@ export class Header extends EventEmitter {
             if (this._componentRemoveEvent === undefined) {
                 throw new UnexpectedUndefinedError('HHTCE22294');
             } else {
-        console.log("mw - handleTabInitiatedComponentRemoveEvent")
                 this.layoutManager.tryDispatchEventToParent('closeButtonPressed');
                 this._componentRemoveEvent(componentItem);
             }
