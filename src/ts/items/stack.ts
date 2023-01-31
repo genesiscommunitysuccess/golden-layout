@@ -334,12 +334,8 @@ export class Stack extends ComponentParentableItem {
             this._header.updateClosability();
         }
 
-        this.tryDispatchEventToParent('itemDestroyed');
+        this.layoutManager.tryDispatchEventToParent('itemDestroyed');
         this.emitStateChangedEvent();
-    }
-
-    private tryDispatchEventToParent<T extends keyof EventEmitter.EventParamsMap>(e: T) {
-        this.layoutManager?.groundItem?.element.dispatchEvent(new Event(e));
     }
 
     /**
