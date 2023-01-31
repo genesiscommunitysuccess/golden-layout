@@ -178,7 +178,10 @@ export class Header extends EventEmitter {
          * Close button
          */
         if (this._configClosable) {
-            this._closeButton = new HeaderButton(this, this._closeLabel, DomConstants.ClassName.Close, () => closeEvent());
+            this._closeButton = new HeaderButton(this, this._closeLabel, DomConstants.ClassName.Close, () => {
+                this.layoutManager.tryDispatchEventToParent('closeButtonPressed');
+                closeEvent();
+            });
         }
 
         this.processTabDropdownActiveChanged();
@@ -342,6 +345,7 @@ export class Header extends EventEmitter {
             if (this._componentRemoveEvent === undefined) {
                 throw new UnexpectedUndefinedError('HHTCE22294');
             } else {
+        console.log("mw - handleTabInitiatedComponentRemoveEvent")
                 this.layoutManager.tryDispatchEventToParent('closeButtonPressed');
                 this._componentRemoveEvent(componentItem);
             }
