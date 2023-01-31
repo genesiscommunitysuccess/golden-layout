@@ -342,6 +342,7 @@ export class Header extends EventEmitter {
             if (this._componentRemoveEvent === undefined) {
                 throw new UnexpectedUndefinedError('HHTCE22294');
             } else {
+                this.layoutManager.tryDispatchEventToParent('closeButtonPressed');
                 this._componentRemoveEvent(componentItem);
             }
         }

@@ -493,6 +493,8 @@ export namespace EventEmitter {
         // (undocumented)
         "close": NoParams;
         // (undocumented)
+        "closeButtonPressed": UnknownParams;
+        // (undocumented)
         "closed": NoParams;
         // (undocumented)
         "destroy": NoParams;
@@ -1175,6 +1177,8 @@ export abstract class LayoutManager extends EventEmitter {
     //
     // @internal @deprecated (undocumented)
     get transitionIndicator(): TransitionIndicator | null;
+    // @internal (undocumented)
+    tryDispatchEventToParent<T extends keyof EventEmitter.EventParamsMap>(e: T): void;
     // @internal (undocumented)
     abstract unbindComponent(container: ComponentContainer, virtual: boolean, component: ComponentContainer.Component | undefined): void;
     // @deprecated
