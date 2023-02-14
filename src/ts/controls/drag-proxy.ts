@@ -229,7 +229,7 @@ export class DragProxy extends EventEmitter {
         this._element.remove();
 
         this._layoutManager.emit('itemDropped', this._componentItem);
-        this.dispatchEventToParent('dragStart')
+        this.dispatchEventToParent('dragStop');
 
         if (this._componentItemFocused && droppedComponentItem !== undefined) {
             droppedComponentItem.focus();
