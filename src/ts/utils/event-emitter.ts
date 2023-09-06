@@ -209,6 +209,7 @@ export namespace EventEmitter {
         "stackHeaderClick": ClickBubblingEventParam;
         "stackHeaderTouchStart": TouchStartBubblingEventParam;
         "userBroadcast": UnknownParams;
+        "closeButtonPre": UnknownParams;
         "closeButtonPressed": UnknownParams;
     }
 

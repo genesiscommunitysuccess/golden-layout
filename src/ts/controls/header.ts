@@ -179,6 +179,7 @@ export class Header extends EventEmitter {
          */
         if (this._configClosable) {
             this._closeButton = new HeaderButton(this, this._closeLabel, DomConstants.ClassName.Close, () => {
+                this.layoutManager.tryDispatchEventToParent('closeButtonPre');
                 closeEvent();
                 this.layoutManager.tryDispatchEventToParent('closeButtonPressed');
             });
