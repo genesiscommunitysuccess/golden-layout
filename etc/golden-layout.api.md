@@ -493,6 +493,8 @@ export namespace EventEmitter {
         // (undocumented)
         "close": NoParams;
         // (undocumented)
+        "closeButtonPre": UnknownParams;
+        // (undocumented)
         "closeButtonPressed": UnknownParams;
         // (undocumented)
         "closed": NoParams;
