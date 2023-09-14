@@ -346,6 +346,7 @@ export class Header extends EventEmitter {
             if (this._componentRemoveEvent === undefined) {
                 throw new UnexpectedUndefinedError('HHTCE22294');
             } else {
+                this.layoutManager.tryDispatchEventToParent('closeButtonPre');
                 this._componentRemoveEvent(componentItem);
                 this.layoutManager.tryDispatchEventToParent('closeButtonPressed');
             }
