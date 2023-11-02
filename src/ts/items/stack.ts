@@ -343,8 +343,10 @@ export class Stack extends ComponentParentableItem {
      */
     toggleMaximise(): void {
         if (this.isMaximised) {
+            this.layoutManager.tryDispatchEventToParent('minimised');
             this.minimise();
         } else {
+            this.layoutManager.tryDispatchEventToParent('maximised');
             this.maximise();
         }
     }
