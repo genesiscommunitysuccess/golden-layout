@@ -1,0 +1,58 @@
+name: Prerelease
+
+# Manually triggered
+on:
+  workflow_dispatch:
+    inputs:
+      dist_tag:
+        description: 'Dist tag (npm i <package>@<dist_tag>), ie. canary, beta, app, client...'
+        required: true
+        default: 'canary'
+        type: string
+      iteration:
+        description: 'Version iteration (<current_version>-<dist_tag>.<iteration> / 2.0.0-axes.1), ie. 1, 2, 3...'
+        required: false
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+        ref: ${{ github.ref }}
+
+    - name: Configure Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        registry-url: https://registry.npmjs.org
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm run build
+
+    - name: Bump version (canary)
+      if: ${{!inputs.iteration}}
+      run: |
+        COMMIT_ID=$(git rev-parse --short HEAD)
+        npm version prepatch --preid "alpha-$COMMIT_ID" --no-git-tag-version
+
+    - name: Bump version (custom)
+      if: ${{ inputs.iteration }}
+      run: |
+        CURRENT_VERSION=$(node -p "require('./package.json').version")
+        # Ensure we just append the prerelease tag to the current version
+        # Logic matches foundation-ui: current-tag.iteration
+        NEW_VERSION="$CURRENT_VERSION-${{inputs.dist_tag}}.${{inputs.iteration}}"
+        npm version "$NEW_VERSION" --no-git-tag-version
+
+    - name: Publish (NPM registry)
+      run: npm publish --tag "${{inputs.dist_tag}}"
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
