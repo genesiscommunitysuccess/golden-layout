@@ -4,7 +4,7 @@ import { AssertError, UnexpectedNullError } from '../errors/internal-error';
 import { LayoutManager } from '../layout-manager';
 import { DomConstants } from '../utils/dom-constants';
 import { AreaLinkedRect, ItemType, SizeUnitEnum } from '../utils/types';
-import { getElementWidthAndHeight, setElementHeight, setElementWidth } from '../utils/utils';
+import { getElementWidthAndHeight, setElementHeight, setElementWidth, moveNode } from '../utils/utils';
 import { ComponentItem } from './component-item';
 import { ComponentParentableItem } from './component-parentable-item';
 import { ContentItem } from './content-item';
@@ -40,7 +40,7 @@ export class GroundItem extends ComponentParentableItem {
                 break;
             }
         }
-        this._containerElement.insertBefore(this.element, before);
+        moveNode(this._containerElement, this.element, before);
     }
 
     override init(): void {
@@ -49,7 +49,7 @@ export class GroundItem extends ComponentParentableItem {
         this.updateNodeSize();
 
         for (let i = 0; i < this.contentItems.length; i++) {
-            this._childElementContainer.appendChild(this.contentItems[i].element);
+            moveNode(this._childElementContainer, this.contentItems[i].element, null);
         }
 
         super.init();
@@ -140,7 +140,7 @@ export class GroundItem extends ComponentParentableItem {
             throw new Error('Ground node can only have a single child');
         } else {
             // contentItem = this.layoutManager._$normalizeContentItem(contentItem, this);
-            this._childElementContainer.appendChild(contentItem.element);
+            moveNode(this._childElementContainer, contentItem.element, null);
             index = super.addChild(contentItem, index);
 
             this.updateSize(false);

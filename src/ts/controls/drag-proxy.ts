@@ -8,7 +8,8 @@ import { DragListener } from '../utils/drag-listener';
 import { EventEmitter } from '../utils/event-emitter';
 import { Side } from '../utils/types';
 import {
-    numberToPixels
+    numberToPixels,
+    moveNode
 } from '../utils/utils';
 
 /**
@@ -107,7 +108,7 @@ export class DragProxy extends EventEmitter {
         this._element.style.top = numberToPixels(initialY);
         tabElement.setAttribute('title', this._componentItem.title);
         titleElement.insertAdjacentText('afterbegin', this._componentItem.title);
-        this._proxyContainerElement.appendChild(this._componentItem.element);
+        moveNode(this._proxyContainerElement, this._componentItem.element, null);
     }
 
     private determineMinMaxXY(): void {

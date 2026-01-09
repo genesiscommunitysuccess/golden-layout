@@ -5,7 +5,7 @@ import { ApiError, BindError } from './errors/external-error';
 import { AssertError, UnexpectedUndefinedError } from './errors/internal-error';
 import { I18nStringId, i18nStrings } from './utils/i18n-strings';
 import { JsonValue, LogicalZIndex } from './utils/types';
-import { deepExtendValue, ensureElementPositionAbsolute, numberToPixels, setElementDisplayVisibility, setElementHeight, setElementWidth } from './utils/utils';
+import { deepExtendValue, ensureElementPositionAbsolute, numberToPixels, setElementDisplayVisibility, setElementHeight, setElementWidth, moveNode } from './utils/utils';
 import { VirtualLayout } from './virtual-layout';
 
 /** @public */
@@ -246,7 +246,7 @@ export class GoldenLayout extends VirtualLayout {
                         throw new BindError(`${i18nStrings[I18nStringId.VirtualComponentDoesNotHaveRootHtmlElement]}: ${typeName}`);
                     } else {
                         ensureElementPositionAbsolute(componentRootElement);
-                        this.container.appendChild(componentRootElement);
+                        moveNode(this.container, componentRootElement, null);
                         this._virtuableComponentMap.set(container, virtuableComponent);
                         container.virtualRectingRequiredEvent = this._containerVirtualRectingRequiredEventListener;
                         container.virtualVisibilityChangeRequiredEvent = this._containerVirtualVisibilityChangeRequiredEventListener;
