@@ -56,3 +56,9 @@ jobs:
       run: npm publish --tag "${{inputs.dist_tag}}"
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+    - name: Output published version
+      if: success()
+      run: |
+        PUBLISHED_VERSION=$(node -p "require('./package.json').version")
+        echo "✅ Successfully published version $PUBLISHED_VERSION with dist-tag ${{inputs.dist_tag}}"
