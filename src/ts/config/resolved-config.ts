@@ -447,6 +447,7 @@ export namespace ResolvedLayoutConfig {
         readonly headerHeight: number;
         readonly dragProxyWidth: number;
         readonly dragProxyHeight: number;
+        readonly itemBorder: number;
     }
 
     export namespace Dimensions {
@@ -461,6 +462,7 @@ export namespace ResolvedLayoutConfig {
                 headerHeight: original.headerHeight,
                 dragProxyWidth: original.dragProxyWidth,
                 dragProxyHeight: original.dragProxyHeight,
+                itemBorder: original.itemBorder,
             }
         }
 
@@ -473,7 +475,8 @@ export namespace ResolvedLayoutConfig {
             defaultMinItemWidthUnit: SizeUnitEnum.Pixel,
             headerHeight: 20,
             dragProxyWidth: 300,
-            dragProxyHeight: 200
+            dragProxyHeight: 200,
+            itemBorder: 0,
         } as const;
     }
 

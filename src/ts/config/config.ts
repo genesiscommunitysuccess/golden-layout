@@ -881,6 +881,13 @@ export namespace LayoutConfig {
          * Default: 200
          */
         dragProxyHeight?: number;
+
+        /**
+         * The width of the border around each item in pixels.
+         * This value will be subtracted from the item's calculated width and height.
+         * Default: 0
+         */
+        itemBorder?: number;
     }
 
     export namespace Dimensions {
@@ -898,6 +905,7 @@ export namespace LayoutConfig {
                 headerHeight: dimensions?.headerHeight ?? ResolvedLayoutConfig.Dimensions.defaults.headerHeight,
                 dragProxyWidth: dimensions?.dragProxyWidth ?? ResolvedLayoutConfig.Dimensions.defaults.dragProxyWidth,
                 dragProxyHeight: dimensions?.dragProxyHeight ?? ResolvedLayoutConfig.Dimensions.defaults.dragProxyHeight,
+                itemBorder: dimensions?.itemBorder ?? ResolvedLayoutConfig.Dimensions.defaults.itemBorder,
             }
             return result;
         }
@@ -912,6 +920,7 @@ export namespace LayoutConfig {
                 headerHeight: resolvedDimensions.headerHeight,
                 dragProxyWidth: resolvedDimensions.dragProxyWidth,
                 dragProxyHeight: resolvedDimensions.dragProxyHeight,
+                itemBorder: resolvedDimensions.itemBorder,
             };
 
             return result;

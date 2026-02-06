@@ -976,6 +976,7 @@ export namespace LayoutConfig {
         dragProxyHeight?: number;
         dragProxyWidth?: number;
         headerHeight?: number;
+        itemBorder?: number;
         // @deprecated
         minItemHeight?: number;
         // @deprecated
@@ -1517,6 +1518,8 @@ export namespace ResolvedLayoutConfig {
         readonly dragProxyWidth: number;
         // (undocumented)
         readonly headerHeight: number;
+        // (undocumented)
+        readonly itemBorder: number;
     }
     // (undocumented)
     export namespace Dimensions {
