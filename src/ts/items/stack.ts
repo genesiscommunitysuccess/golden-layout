@@ -699,7 +699,8 @@ export class Stack extends ComponentParentableItem {
     /** @internal */
     private updateNodeSize(): void {
         if (this.element.style.display !== 'none') {
-            const content: WidthAndHeight = getElementWidthAndHeight(this.element);
+            const itemBorder = this.layoutManager.layoutConfig.dimensions.itemBorder;
+            const content: WidthAndHeight = getElementWidthAndHeight(this.element, itemBorder);
 
             if (this._header.show) {
                 const dimension = this._header.leftRightSided ? WidthOrHeightPropertyName.width : WidthOrHeightPropertyName.height;

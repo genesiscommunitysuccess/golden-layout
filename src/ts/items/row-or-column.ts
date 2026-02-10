@@ -315,7 +315,7 @@ export class RowOrColumn extends ContentItem {
      */
     private calculateAbsoluteSizes(): RowOrColumn.AbsoluteSizes {
         const totalSplitterSize = (this.contentItems.length - 1) * this._splitterSize;
-        const { width: elementWidth, height: elementHeight } = getElementWidthAndHeight(this.element);
+        const { width: elementWidth, height: elementHeight } = getElementWidthAndHeight(this.element, 0);
 
         let totalSize: number;
         let crossAxisSize: number;

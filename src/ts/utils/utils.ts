@@ -78,10 +78,10 @@ export function setElementHeight(element: HTMLElement, height: number): void {
 }
 
 /** @internal */
-export function getElementWidthAndHeight(element: HTMLElement): WidthAndHeight {
+export function getElementWidthAndHeight(element: HTMLElement, itemBorder = 0): WidthAndHeight {
     return {
-        width: element.offsetWidth,
-        height: element.offsetHeight,
+        width: element.offsetWidth - itemBorder,
+        height: element.offsetHeight - itemBorder,
     };
 }
 

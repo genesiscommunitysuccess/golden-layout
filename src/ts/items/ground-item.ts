@@ -334,7 +334,7 @@ export class GroundItem extends ComponentParentableItem {
     }
 
     private updateNodeSize(): void {
-        const { width, height } = getElementWidthAndHeight(this._containerElement);
+        const { width, height } = getElementWidthAndHeight(this._containerElement, 0);
 
         setElementWidth(this.element, width);
         setElementHeight(this.element, height);
