@@ -1296,7 +1296,7 @@ export abstract class LayoutManager extends EventEmitter {
             throw new UnexpectedUndefinedError('LMMXI19993');
         } else {
             this._groundItem.element.prepend(stack.element);
-            const { width, height } = getElementWidthAndHeight(this._containerElement, this.layoutConfig.dimensions.itemBorder);
+            const { width, height } = getElementWidthAndHeight(this._containerElement, 0);
             setElementWidth(stack.element, width);
             setElementHeight(stack.element, height);
             stack.updateSize(true);
