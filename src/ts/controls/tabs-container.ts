@@ -3,7 +3,7 @@ import { ComponentItem } from '../items/component-item';
 import { LayoutManager } from '../layout-manager';
 import { DomConstants } from '../utils/dom-constants';
 import { DragListener } from '../utils/drag-listener';
-import { numberToPixels, pixelsToNumber } from '../utils/utils';
+import { numberToPixels, pixelsToNumber, moveNode } from '../utils/utils';
 import { Tab } from './tab';
 
 /** @internal */
@@ -70,9 +70,9 @@ export class TabsContainer {
         this._tabs.splice(index, 0, tab);
 
         if (index < this._element.childNodes.length) {
-            this._element.insertBefore(tab.element, this._element.childNodes[index]);
+            moveNode(this._element, tab.element, this._element.childNodes[index]);
         } else {
-            this._element.appendChild(tab.element);
+            moveNode(this._element, tab.element, null);
         }
     }
 
@@ -157,7 +157,7 @@ export class TabsContainer {
 
                 //Put the tab in the tabContainer so its true width can be checked
                 if (tabElement.parentElement !== this._element) {
-                    this._element.appendChild(tabElement);
+                    moveNode(this._element, tabElement, null);
                 }
                 const tabMarginRightPixels = getComputedStyle(activeTab.element).marginRight;
                 const tabMarginRight = pixelsToNumber(tabMarginRightPixels);
@@ -200,7 +200,7 @@ export class TabsContainer {
                             }
                             this._lastVisibleTabIndex = i;
                             if (tabElement.parentElement !== this._element) {
-                                this._element.appendChild(tabElement);
+                                moveNode(this._element, tabElement, null);
                             }
                         } else {
                             tabOverlapAllowanceExceeded = true;
@@ -211,7 +211,7 @@ export class TabsContainer {
                         tabElement.style.zIndex = 'auto';
                         tabElement.style.marginLeft = '';
                         if (tabElement.parentElement !== this._element) {
-                            this._element.appendChild(tabElement);
+                            moveNode(this._element, tabElement, null);
                         }
                     }
 
@@ -222,7 +222,7 @@ export class TabsContainer {
                             tabElement.style.marginLeft = '';
 
                             if (tabElement.parentElement !== this._dropdownElement) {
-                                this._dropdownElement.appendChild(tabElement);
+                                moveNode(this._dropdownElement, tabElement, null);
                             }
                         } else {
                             //We now know the tab menu must be shown, so we have to recalculate everything.
@@ -235,7 +235,7 @@ export class TabsContainer {
                     tabElement.style.zIndex = 'auto';
                     tabElement.style.marginLeft = '';
                     if (tabElement.parentElement !== this._element) {
-                        this._element.appendChild(tabElement);
+                        moveNode(this._element, tabElement, null);
                     }
                 }
             }

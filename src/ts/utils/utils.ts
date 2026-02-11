@@ -204,3 +204,12 @@ export function getErrorMessage(e: unknown): string {
         }
     }
 }
+
+/** @internal */
+export function moveNode(parent: Node, child: Node, referenceNode: Node | null): void {
+    if ('moveBefore' in parent && typeof (parent as any).moveBefore === 'function') {
+        (parent as any).moveBefore(child, referenceNode);
+    } else {
+        parent.insertBefore(child, referenceNode);
+    }
+}

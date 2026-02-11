@@ -12,7 +12,8 @@ import {
     numberToPixels,
     pixelsToNumber,
     setElementHeight,
-    setElementWidth
+    setElementWidth,
+    moveNode
 } from "../utils/utils"
 import { ComponentItem } from './component-item'
 import { ContentItem } from './content-item'
@@ -135,13 +136,13 @@ export class RowOrColumn extends ContentItem {
 
             if (index > 0) {
                 this.contentItems[index - 1].element.insertAdjacentElement('afterend', splitterElement);
-                splitterElement.insertAdjacentElement('afterend', contentItem.element);
+                moveNode(splitterElement.parentNode as HTMLElement, contentItem.element, splitterElement.nextSibling as HTMLElement | null);
             } else {
                 this.contentItems[0].element.insertAdjacentElement('beforebegin', splitterElement);
-                splitterElement.insertAdjacentElement('beforebegin', contentItem.element);
+                moveNode(splitterElement.parentNode as HTMLElement, contentItem.element, splitterElement as HTMLElement);
             }
         } else {
-            this._childElementContainer.appendChild(contentItem.element);
+            moveNode(this._childElementContainer, contentItem.element, null);
         }
 
         super.addChild(contentItem, index);
@@ -241,7 +242,7 @@ export class RowOrColumn extends ContentItem {
         this.updateNodeSize();
 
         for (let i = 0; i < this.contentItems.length; i++) {
-            this._childElementContainer.appendChild(this.contentItems[i].element);
+            moveNode(this._childElementContainer, this.contentItems[i].element, null);
         }
 
         super.init();

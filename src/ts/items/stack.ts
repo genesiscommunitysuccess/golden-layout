@@ -10,7 +10,8 @@ import { AreaLinkedRect, ItemType, JsonValue, Side, SizeUnitEnum, WidthAndHeight
 import {
     getElementWidthAndHeight,
     numberToPixels,
-    setElementDisplayVisibility
+    setElementDisplayVisibility,
+    moveNode
 } from '../utils/utils';
 import { ComponentItem } from './component-item';
 import { ComponentParentableItem } from './component-parentable-item';
@@ -159,7 +160,7 @@ export class Stack extends ComponentParentableItem {
         this.updateNodeSize();
 
         for (let i = 0; i < this.contentItems.length; i++) {
-            this._childElementContainer.appendChild(this.contentItems[i].element);
+            moveNode(this._childElementContainer, this.contentItems[i].element, null);
         }
 
         super.init();
@@ -296,7 +297,7 @@ export class Stack extends ComponentParentableItem {
             throw new AssertError('SACC88532'); // Stacks can only have Component children
         } else {
             index = super.addChild(contentItem, index);
-            this._childElementContainer.appendChild(contentItem.element);
+            moveNode(this._childElementContainer, contentItem.element, null);
             this._header.createTab(contentItem, index);
             this.setActiveComponentItem(contentItem, focus);
             this._header.updateTabSizes();
