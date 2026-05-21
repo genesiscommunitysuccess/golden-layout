@@ -1221,6 +1221,7 @@ export namespace LayoutManager {
         parentItem: ContentItem;
     }
     export interface LocationSelector {
+        componentType?: JsonValue;
         index?: number;
         typeId: LocationSelector.TypeId;
     }
@@ -1235,7 +1236,9 @@ export namespace LayoutManager {
             FirstStack = 2,
             FocusedItem = 0,
             FocusedStack = 1,
-            Root = 7
+            LastStack = 8,
+            Root = 7,
+            StackContainingComponentType = 9
         }
     }
     const defaultLocationSelectors: readonly LocationSelector[];
